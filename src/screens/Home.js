@@ -1,5 +1,11 @@
+
 import React from 'react'
 import styled from 'styled-components';
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import Card from '../components/Card'
+import { BaseUrl } from '../constants/urls'
+import useRequestData from '../hooks/useRequestData'
 
 import Cardinfo from '../components/CardInfo'
 
@@ -30,6 +36,7 @@ const Button = styled.button `
 const Home = () => {
     const history = useHistory();
 
+
     return (
         <ContainerHome>
             <Header>
@@ -42,5 +49,7 @@ const Home = () => {
             
         </ContainerHome>
     )
+
+  
 }
 export default Home;

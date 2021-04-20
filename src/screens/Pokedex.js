@@ -30,6 +30,7 @@ const Pokedex = () => {
     const history = useHistory();
 
     return (
+
         <ContainerHome>
             <Header>
                 <ImgLogo src ="https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png"/>
@@ -40,6 +41,7 @@ const Pokedex = () => {
             <h4> Pokemons escolhidos </h4>
             
         </ContainerHome>
+
     )
 }
 export default Pokedex
