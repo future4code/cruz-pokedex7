@@ -4,7 +4,7 @@ const Details = () => {
 
     return (
         <div>
-
+            <p>Sou o details</p>
         </div>
     )
 }

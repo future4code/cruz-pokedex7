@@ -1,36 +1,55 @@
+
+import React from 'react'
+import styled from 'styled-components';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import { BaseUrl } from '../constants/urls'
 import useRequestData from '../hooks/useRequestData'
 
+import Cardinfo from '../components/CardInfo'
+
+import { useHistory, useParams } from "react-router-dom";
+import { goToPokedex, goToLastPage } from "../routes/coordinator";
+
+const ContainerHome = styled.div `
+
+`
+const Header = styled.div `
+    height: 85 px;
+    display:flex;
+    justify-content:space-between;
+    background-color:#FC8701;
+`
+
+const ImgLogo = styled.img `
+    width: 200px;
+
+`
+
+const Button = styled.button `
+    padding: 5px ;
+    margin: 20px 20px ;
+
+`
+
 const Home = () => {
-
-    useEffect(() => {
-        getPokeInfo()
-    }, [])
+    const history = useHistory();
 
 
-    const [pokedexGringo, setPokedexGringo] = useState([])
-    const pokedex = useRequestData({}, "pokemon?limit=30&offset=0")
+    return (
+        <ContainerHome>
+            <Header>
+                <ImgLogo src ="https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png"/>
+                <h2> Lista de Pokemóns </h2>
+                <Button onClick ={() => goToPokedex(history)}> Minha Pokedex </Button>
+            </Header>
 
+            <Cardinfo />
+            
+        </ContainerHome>
+    )
 
-const getPokeInfo = async () => {
-    const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`)
-    setPokedexGringo(response.data.results)
+  
 }
-
-const teste = pokedexGringo.map(pokemon => {
-    return (<Card name={pokemon.name} />)
-})
-
-
-
-return (
-    <div>
-        <h1>Home page</h1>
-        {teste}
-    </div>
-)
-}
-export default Home
+export default Home;
