@@ -76,6 +76,7 @@ const HomePage = () => {
         number={pokemon.id}
         image={pokemon.sprites.front_default}
         type={pokemon.types[0].type.name}
+        text={'Adicionar'}
         functionAddOrRemove={() => addToFavorites(pokemon)}
         remove={() => removeToFavorites(pokemon)}
       />
@@ -91,8 +92,9 @@ const HomePage = () => {
         number={pokemon.id}
         image={pokemon.sprites.front_default}
         type={pokemon.types[0].type.name}
+        text={'Remover'}
         add={() => addToFavorites(pokemon)}
-        remove={() => removeToFavorites(pokemon)}
+        details={() => removeToFavorites(pokemon)}
       />
     )
   })

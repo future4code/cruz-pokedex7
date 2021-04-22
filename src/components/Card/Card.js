@@ -27,7 +27,7 @@ const Card = (props) => {
                     </PokemonName>
                 </BodyContainer>
                 <ButtonContainner>
-                    <Button onClick={() => props.functionAddOrRemove()}>Adicionar</Button>
+                    <Button onClick={() => props.functionAddOrRemove()}>{props.text}</Button>
                     <Button onClick={() => props.details()}>Detalhes</Button>
                 </ButtonContainner>
             </ContainerPoke>
