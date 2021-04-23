@@ -1,12 +1,21 @@
-import React from "react";
-import Cardinfo from "../components/CardInfo";
-import { useHistory, useParams } from "react-router-dom";
-import { goToHome, goToLastPage } from "../routes/coordinator";
-import { MotherContainer } from "../styles/PokedexStyle";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import GlobalStateContext from "../global/GlobalStateContext";
+import { goToHome } from "../routes/coordinator";
+import Card from "../components/Card/Card";
+import { MotherContainer, CardPokemon } from "../styles/PokedexStyle";
 import { Header, ImgLogo, Button } from "../styles/HeaderStyle";
 
 const PokedexPage = () => {
   const history = useHistory();
+  const { states, setters } = useContext(GlobalStateContext);
+
+  const onClickRemover = (pokemon, index) => {
+    let newPokemon = [...states.pokemons, pokemon];
+    states.pokedex.splice(index, 1);
+    setters.setPokemons(newPokemon);
+    alert(`O pokemon ${pokemon.name} foi removido da pokedex.`);
+  };
 
   return (
     <MotherContainer>
@@ -15,7 +24,24 @@ const PokedexPage = () => {
         <h2> Minha Pokedex </h2>
         <Button onClick={() => goToHome(history)}> Lista de Pokemons </Button>
       </Header>
-      <h4> Pokemons escolhidos </h4>
+      <CardPokemon>
+      {states.pokedex.length > 0 ? (states.pokedex.map((pokemon, index) => {
+        return (
+          <Card
+            key={pokemon.id}
+            name={pokemon.name}
+            number={pokemon.number}
+            url={pokemon.url}
+            index={index}
+            pokemon={pokemon}
+            onClickRemover={onClickRemover}
+            pokedex={true}
+          />
+        );
+      })):(
+        <h1>Pokedex Vazia</h1>
+      )}
+      </CardPokemon>
     </MotherContainer>
   );
 };

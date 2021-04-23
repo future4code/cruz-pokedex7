@@ -1,37 +1,75 @@
-
-import React from 'react'
-import { colors } from '../../constants/backColorsCards'
-import { ContainerPoke, ImageContainer, Number, BodyContainer, MainTypeContainer, PokemonName, Button, ButtonContainner, ContainerType } from './Styles'
-
-const color = colors
-
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import {
+  ContainerPoke,
+  ImageContainer,
+  BodyContainer,
+  PokemonName,
+  Button,
+  ButtonContainner,
+  ContainerType,
+} from "./Styles";
 
 const Card = (props) => {
-    const { name, type } = props
-    const colorContainer = color[props.type]
+  const [pokeImage, setPokeImage] = useState([]);
+  const history = useHistory();
 
-    return (
-        <ContainerType >
-            <ContainerPoke>
-                <ImageContainer>
-                    <Number>
-                        {props.number}
-                    </Number>
-                </ImageContainer>
-                <BodyContainer >
-                    <MainTypeContainer style={{ backgroundColor: colorContainer }} >
-                        {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </MainTypeContainer>
-                    <PokemonName>
-                        {name.charAt(0).toUpperCase() + name.slice(1)}
-                    </PokemonName>
-                </BodyContainer>
-                <ButtonContainner>
-                    <Button onClick={() => props.functionAddOrRemove()}>{props.text}</Button>
-                    <Button onClick={() => props.details()}>Detalhes</Button>
-                </ButtonContainner>
-            </ContainerPoke>
-        </ContainerType>
-    )
-}
-export default Card
+  const goToPokeDetail = (pokename) => {
+    history.push(`/details/${pokename}`);
+  };
+
+  useEffect(() => {
+    axios
+      .get(props.url)
+      .then((res) => {
+        setPokeImage(res.data.sprites.other.dream_world.front_default);
+      })
+      .catch((err) => {
+        console.log(err.mensage);
+      });
+  }, [props.url]);
+
+  const renderButtons = () => {
+    if (props.pokedex) {
+      return (
+        <ButtonContainner>
+          <Button
+            onClick={() => props.onClickRemover(props.pokemon, props.index)}
+          >
+            Remover
+          </Button>
+          <Button onClick={() => goToPokeDetail(props.name)}>Detalhes</Button>
+        </ButtonContainner>
+      );
+    } else {
+      return (
+        <ButtonContainner>
+          <Button
+            onClick={() => props.onClickAdicionar(props.pokemon, props.index)}
+          >
+            Adicionar
+          </Button>
+          <Button onClick={() => goToPokeDetail(props.name)}>Detalhes</Button>
+        </ButtonContainner>
+      );
+    }
+  };
+
+  return (
+    <ContainerType>
+      <ContainerPoke>
+        <ImageContainer>
+          <img src={pokeImage} alt={props.name} />
+        </ImageContainer>
+        <BodyContainer>
+          <PokemonName>
+            {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
+          </PokemonName>
+        </BodyContainer>
+        {renderButtons()}
+      </ContainerPoke>
+    </ContainerType>
+  );
+};
+export default Card;

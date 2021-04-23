@@ -1,5 +1,5 @@
 
-export const colors ={
+export const color ={
     normal: '#A8A878'
     ,
     fire :
