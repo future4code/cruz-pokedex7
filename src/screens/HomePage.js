@@ -1,105 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { goToPokedex, goToLastPage } from "../routes/coordinator";
-import axios from "axios";
+import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import GlobalStateContext from "../global/GlobalStateContext";
+import { goToPokedex } from "../routes/coordinator";
 import Card from "../components/Card/Card";
-import { BaseUrl } from "../constants/BaseUrl";
-import useRequestData from "../hooks/useRequestData";
-import Cardinfo from "../components/CardInfo";
-import { MotherContainer } from "../styles/HomeStyle";
+import { MotherContainer, CardPokemon } from "../styles/HomeStyle";
 import { Header, ImgLogo, Button } from "../styles/HeaderStyle";
 
 const HomePage = () => {
   const history = useHistory();
+  const { states, setters } = useContext(GlobalStateContext);
 
-
-
-
-
-
-  useEffect(() => {
-    getPokeInfo()
-  }, [])
-
-  const [favoritePokes, setFavoritePokes] = useState([])
-  const [pokeData, setPokeData] = useState([])
-  const arrayPokes = []
-  const getPokeInfo = async () => {
-    try {
-      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon`)
-      for (let data of response.data.results) {
-        const response = await axios.get(data.url)
-        const dataOnePoke = response.data
-        arrayPokes.push(dataOnePoke)
-      }
-    } catch (error) {
-      console.log("Erro encontrado: ", error)
-    }
-    setPokeData(arrayPokes)
-  }
-
-  const addToFavorites = (pokemon) => {
-    let favorite = [...favoritePokes, pokemon]
-    favorite.sort(function (a, b) {
-      if (a.id > b.id) {
-        return 1
-      } else {
-        return -1
-      }
-    })
-    setFavoritePokes(favorite)
-    const favorites = pokeData.filter((id) => pokemon !== id)
-    setPokeData(favorites)
-  }
-
-  const removeToFavorites = (pokemon) => {
-
-    const newFavorites = favoritePokes.filter(id => pokemon !== id)
-    setFavoritePokes(newFavorites)
-    let homePokemons = [...pokeData, pokemon]
-    homePokemons.sort(function (a, b) {
-      if (a.id > b.id) {
-        return 1
-      } else {
-        return -1
-      }
-    })
-    setPokeData(homePokemons)
-  }
-
-  const renderHomeCards = pokeData.map((pokemon) => {
-    return (
-      <Card
-        key={pokemon.id}
-        name={pokemon.name}
-        url={pokemon.url}
-        number={pokemon.id}
-        image={pokemon.sprites.front_default}
-        type={pokemon.types[0].type.name}
-        text={'Adicionar'}
-        functionAddOrRemove={() => addToFavorites(pokemon)}
-        remove={() => removeToFavorites(pokemon)}
-      />
-    )
-  })
-
-  const renderFavorites = favoritePokes.map((pokemon) => {
-    return (
-      <Card
-        key={pokemon.id}
-        name={pokemon.name}
-        url={pokemon.url}
-        number={pokemon.id}
-        image={pokemon.sprites.front_default}
-        type={pokemon.types[0].type.name}
-        text={'Remover'}
-        add={() => addToFavorites(pokemon)}
-        details={() => removeToFavorites(pokemon)}
-      />
-    )
-  })
-
-
+  const onClickAdicionar = (pokemon, index) => {
+    let newPokedex = [...states.pokedex, pokemon];
+    states.pokemons.splice(index, 1);
+    setters.setPokedex(newPokedex);
+    alert(`O pokemon ${pokemon.name} foi adicionado à sua pokedex.`);
+  };
 
   return (
     <MotherContainer>
@@ -108,11 +24,22 @@ const HomePage = () => {
         <h2> Lista de Pokemóns </h2>
         <Button onClick={() => goToPokedex(history)}> Minha Pokedex </Button>
       </Header>
-      <Cardinfo />
-      {renderHomeCards}
-      <h1>Favoritos</h1>
-      {renderFavorites}
+      <CardPokemon>
+        {states.pokemons.map((pokemon, index) => {
+          return (
+            <Card
+              key={pokemon.id}
+              name={pokemon.name}
+              url={pokemon.url}
+              index={index}
+              pokemon={pokemon}
+              onClickAdicionar={onClickAdicionar}
+              pokedex={false}
+            />
+          );
+        })}
+      </CardPokemon>
     </MotherContainer>
   );
 };
-export default HomePage
+export default HomePage;
