@@ -2,7 +2,6 @@ import styled from 'styled-components'
 
 export const MotherContainer = styled.div`
 	background-color:#4464AD;
-	
 `;
 
 export const CardPokemon = styled.div `

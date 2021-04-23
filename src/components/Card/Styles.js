@@ -28,20 +28,14 @@ export const ContainerPoke = styled.div`
 
 export const ImageContainer = styled.div`
   height: 60%;
-  padding-top:10px;
-  /* background-repeat: no-repeat; */
-  /* background-size: contain; */
-  /* background-position: center; */
-  /* 1 */
-  
+  padding-top:10px; 
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 
   img {
     height: 80%;
     width:80%;
-    /* object-fit: scale-down; */
+   
   }
 `;
 
@@ -54,7 +48,6 @@ export const BodyContainer = styled.div`
 
 export const PokemonName = styled.h2`
   text-align: center;
-  
   background-color:white;
   margin-top: 0;
 `;
@@ -63,14 +56,11 @@ export const PokemonName = styled.h2`
 export const ButtonContainner = styled.div`
   display: flex;
   height: 25%;
-  /* margin-top:10px; */
-
 `;
 
 export const Button = styled.button`
   height: 30px;
   flex-basis:100%;
-
   color: #F83F2F;
   border: 0px solid black;
   background-color:white;
