@@ -21,8 +21,8 @@ const HomePage = () => {
     <MotherContainer>
       <Header>
         <ImgLogo src="https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png" />
-        <h2> Lista de Pokemóns </h2>
-        <Button onClick={() => goToPokedex(history)}> Minha Pokedex </Button>
+        <h2> LISTA DE POKEMONS </h2>
+        <Button onClick={() => goToPokedex(history)}> ACESSAR POKEDEX </Button>
       </Header>
       <CardPokemon>
         {states.pokemons.map((pokemon, index) => {

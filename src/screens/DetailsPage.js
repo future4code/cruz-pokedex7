@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { MotherContainer, ContainerDetails } from "../styles/DetailsStyle";
+import { MotherContainer, ContainerDetails, NameTitle, ImgPoke,
+  ImgPokeBack,
+  ImgPokeFront,
+  EstatisticTitle,
+  Estatistic,
+  EstatisticData,
+  Data, DataType, AttackTitle,
+  Attack} from "../styles/DetailsStyle";
 import { Header, ImgLogo, Button } from "../styles/HeaderStyle";
 
 const DetailsPage = () => {
@@ -35,12 +42,12 @@ const DetailsPage = () => {
         <h2> Detalhes do Pokemon </h2>
         <Button onClick={goBack}> Voltar </Button>
       </Header>
-      <div>
+      <NameTitle>
         <h1>{pathParams.pokename.charAt(0).toUpperCase() + pathParams.pokename.slice(1)}</h1>
-      </div>
+      </NameTitle>
       <ContainerDetails>
-        <div>
-          <div>
+        <ImgPoke>
+          <ImgPokeFront>
             <img
               src={
                 pokemonData.sprites !== undefined ? (
@@ -51,8 +58,8 @@ const DetailsPage = () => {
                 )
               }
             />
-          </div>
-          <div>
+          </ImgPokeFront>
+          <ImgPokeBack>
             <img
               src={
                 pokemonData.sprites !== undefined ? (
@@ -63,13 +70,13 @@ const DetailsPage = () => {
                 )
               }
             />
-          </div>
-        </div>
-        <div>
-          <div>
+          </ImgPokeBack>
+        </ImgPoke>
+        <EstatisticData>
+          <EstatisticTitle>
             <h2>Estatísticas</h2>
-          </div>
-          <div>
+          </EstatisticTitle>
+          <Estatistic>
             {pokemonData.stats !== undefined ? (
               pokemonData.stats.map((dados) => {
                 return (
@@ -83,10 +90,10 @@ const DetailsPage = () => {
             ) : (
               <p>Carregando os dados...</p>
             )}
-          </div>
-        </div>
-        <div>
-          <div>
+          </Estatistic>
+        </EstatisticData>
+        <Data>
+          <DataType>
             {pokemonData.types !== undefined ? (
               pokemonData.types.map((dados) => {
                 return (
@@ -100,11 +107,11 @@ const DetailsPage = () => {
             ) : (
               <p>Carregando os dados...</p>
             )}
-          </div>
-          <div>
-            <div>
-              <h2>Principais ataque</h2>
-            </div>
+          </DataType>
+          <Attack>
+            <AttackTitle>
+              <h2>Principais ataques</h2>
+            </AttackTitle>
             <div>
               {pokemonData.moves !== undefined ? (
                 pokemonData.moves.map((dados, index) => {
@@ -122,8 +129,8 @@ const DetailsPage = () => {
                 <p>Carregando os dados...</p>
               )}
             </div>
-          </div>
-        </div>
+          </Attack>
+        </Data>
       </ContainerDetails>
     </MotherContainer>
   );
