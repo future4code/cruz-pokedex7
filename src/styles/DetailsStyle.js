@@ -72,3 +72,12 @@ export const Attack = styled.div`
   
  
 `;
+
+export const TypeContainer = styled.p`
+width:60%;
+display:flex;
+justify-content:center;
+color:white;
+border-radius:8px;
+
+`
