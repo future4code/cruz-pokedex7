@@ -21,7 +21,7 @@ const PokedexPage = () => {
     <MotherContainer>
       <Header>
         <ImgLogo src="https://logodownload.org/wp-content/uploads/2017/08/pokemon-logo.png" />
-        <h2> Minha Pokedex </h2>
+        <h2> MINHA POKEDEX </h2>
         <Button onClick={() => goToHome(history)}> Lista de Pokemons </Button>
       </Header>
       <CardPokemon>
@@ -39,9 +39,10 @@ const PokedexPage = () => {
           />
         );
       })):(
-        <h1>Pokedex Vazia</h1>
+        <h1>SUA POKEDEX ESTA VAZIA</h1>
       )}
       </CardPokemon>
+      
     </MotherContainer>
   );
 };
