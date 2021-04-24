@@ -8,8 +8,9 @@ import { MotherContainer, ContainerDetails, NameTitle, ImgPoke,
   Estatistic,
   EstatisticData,
   Data, DataType, AttackTitle,
-  Attack} from "../styles/DetailsStyle";
+  Attack, TypeContainer} from "../styles/DetailsStyle";
 import { Header, ImgLogo, Button } from "../styles/HeaderStyle";
+import  {color} from '../constants/backColorsCards'
 
 const DetailsPage = () => {
   const history = useHistory();
@@ -98,9 +99,9 @@ const DetailsPage = () => {
               pokemonData.types.map((dados) => {
                 return (
                   <div key={dados.id}>
-                    <p>
-                      <strong>{dados.type.name}</strong>
-                    </p>
+                    <TypeContainer style={ { backgroundColor:color[`${dados.type.name}`]}}>
+                      <strong>{dados.type.name.charAt(0).toUpperCase() + dados.type.name.slice(1)}</strong>
+                    </TypeContainer>
                   </div>
                 );
               })
