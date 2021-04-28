@@ -1,16 +1,18 @@
-# POKEDEX
 
-Nome dos integrantes: 
-- Pessoa 1
-- Pessoa 2
-- Pessoa 3
+POKEDEX
 
-Link do Surge: www.link.com.br
+Nome dos integrantes:
+
+    Sérgio Henrique 
+    Laís de Jesus
+    Anderson Oliveira
+    
+Link do Surge: http://nebulous-transport.surge.sh/
 
 O que funciona:
-- Item 1
-- Item 2
 
-O que não funciona: 
-- Item 3
-- Item 4
+    Página Home,
+    Pokedex, 
+    Detalhes.
+
+
